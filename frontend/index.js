@@ -4,7 +4,15 @@ function moduleProject3() {
 
   function buildNav(links) {
     //  ✨ do your magic here
-    return document.createElement('nav')
+    let tupperware= document.createElement('nav')
+    links.forEach(link=>{
+      let mr=document.createElement('a')
+      mr.href=link.href
+      mr.title=link.title
+      mr.textContent=link.textContent
+      tupperware.appendChild(mr)
+    })
+    return tupperware
   }
 
   // ❗ DOM creation using your `buildNav` component (do not change):
@@ -20,6 +28,27 @@ function moduleProject3() {
 
   function buildLearnerCard(learner, languages) {
     //  ✨ do your magic here
+    let flow=document.createElement('div')
+    flow.classList.add('learner-card')
+    let roster=document.createElement('p')
+    roster.textContent=learner.fullName
+    let ego=document.createElement('p')
+    ego.textContent=`Learner ID: ${learner.id}`
+    let rebirth=document.createElement('p')
+    rebirth.textContent=`Date of Birth: ${learner.dateOfBirth}`
+    let langue=document.createElement('p')
+    let tongue=languages.find(lung=>lung.id===learner.favLanguage)
+    langue.textContent=`Favorite Language: ${tongue.name}`;
+    [roster,ego,rebirth,langue].forEach(p=>{
+      flow.appendChild(p)
+    })
+    flow.addEventListener('click',evt=>{
+      document.querySelectorAll('.learner-card').forEach(card=>{
+        card.classList.remove('active')
+      })
+      flow.classList.add('active')
+    })
+    return flow
   }
 
   {
@@ -40,13 +69,33 @@ function moduleProject3() {
       { id: 17, fullName: 'Daniel Castillo', dateOfBirth: '1995-11-05', favLanguage: 12 }
     ]
     //  ✨ do your magic here
+    learners.forEach(learner=>{
+      let cado=buildLearnerCard(learner,languages)
+      document.querySelector('section').appendChild(cado)
+    })
   }
 
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
 
   function buildFooter(footerData) {
     //  ✨ do your magic here
-    return document.createElement('footer')
+    let footclan= document.createElement('footer')
+    let comp=document.createElement('div')
+    comp.className='company-info'
+    let annie=document.createElement('p')
+    annie.className='company-name'
+    annie.textContent=footerData.companyName
+    let dress=document.createElement('p')
+    dress.className='address'
+    dress.textContent=footerData.address
+    let male=document.createElement('p')
+    male.className='contact-email'
+    male.textContent=`Email: <a href="mailto${footerData.contactEmail}"> ${footerData.contactEmail}</a>`
+    comp.appendChild(annie)
+    comp.appendChild(dress)
+    comp.appendChild(male)
+    footclan.appendChild(comp)
+    return footclan
   }
 
   // ❗ DOM creation using your `buildFooter` component (do not change):
