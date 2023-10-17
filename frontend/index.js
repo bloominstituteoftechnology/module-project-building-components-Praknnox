@@ -90,11 +90,24 @@ function moduleProject3() {
     dress.textContent=footerData.address
     let male=document.createElement('p')
     male.className='contact-email'
-    male.textContent=`Email: <a href="mailto${footerData.contactEmail}"> ${footerData.contactEmail}</a>`
+    male.innerHTML=`Email: <a href="mailto${footerData.contactEmail}"> ${footerData.contactEmail}</a>`
     comp.appendChild(annie)
     comp.appendChild(dress)
     comp.appendChild(male)
     footclan.appendChild(comp)
+    let socials=document.createElement('div')
+    socials.className='social-media'
+    for(let indices in footerData.socialMedia){
+      let core=document.createElement('a')
+      core.href=footerData.socialMedia[indices]
+      core.textContent=indices.charAt(0).toUpperCase()+indices.slice(1)
+      socials.appendChild(core)
+    }
+    let year=new Date().getFullYear()
+    let cpyright=document.createElement('div')
+    cpyright.textContent=`© ${footerData.companyName.toUpperCase()} ${year}`
+    footclan.appendChild(socials)
+    footclan.appendChild(cpyright)
     return footclan
   }
 
@@ -113,6 +126,12 @@ function moduleProject3() {
   // 👉 TASK 4 - Clicking on the section should deactivate the active card
 
   //  ✨ do your magic here
+  document.addEventListener('click',event=>{
+    if(event.target===document.querySelector('section')){
+      let deck=document.querySelectorAll('.learner-card')
+      deck.forEach(card=>card.classList.remove('active'))
+    }
+  })
 }
 
 // ❗ DO NOT CHANGE THIS CODE
